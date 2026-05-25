@@ -572,9 +572,27 @@ dinov3_vitl16_dinotxt_tet1280d20h24l, tokenizer = torch.hub.load(REPO_DIR, 'dino
 
 ## Installation
 
-The training and evaluation code requires PyTorch version >= 2.7.1 as well as a few other 3rd party packages. Note that the code has only been tested with the specified versions and also expects a Linux environment. To setup all the required dependencies for training and evaluation, please follow the instructions below:
+The training and evaluation code requires Python >= 3.11, PyTorch >= 2.0.0, and torchvision >= 0.15.0 as well as a few other 3rd party packages (`ftfy`, `numpy`, `omegaconf`, `regex`, `scikit-learn`, `submitit`, `termcolor`, `torchmetrics`). Note that the code has only been tested on Linux. Choose one of the installation methods below:
 
-*[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)* **(Recommended)** - Clone the repository and then create and activate a `dinov3` conda environment using the provided environment definition:
+*[uv](https://docs.astral.sh/uv/)* **(Recommended)** - Clone the repository and then sync the environment from `pyproject.toml`. The project pins the PyTorch index in `[tool.uv.sources]`, so `torch` and `torchvision` are fetched from `https://pytorch.org` rather than PyPI — update the `[[tool.uv.index]]` URL in `pyproject.toml` to match your CUDA build (e.g. `cu124`, `cpu`):
+
+```shell
+uv sync
+```
+
+To also install the development tools (`docstr-coverage`, `mypy`, `pylint`, `ruff`):
+
+```shell
+uv sync --group dev
+```
+
+*pip* - Install the package (and its runtime dependencies) directly from the repository root:
+
+```shell
+pip install -e .
+```
+
+*[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)* - Create and activate a `dinov3` conda environment using the provided environment definition:
 
 ```shell
 micromamba env create -f conda.yaml
