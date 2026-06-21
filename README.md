@@ -576,20 +576,10 @@ The training and evaluation code requires Python >= 3.11, PyTorch >= 2.0.0, and 
 
 *[uv](https://docs.astral.sh/uv/)* **(Recommended)** - Clone the repository and then sync the environment from `pyproject.toml`. The project pins the PyTorch index in `[tool.uv.sources]`, so `torch` and `torchvision` are fetched from `https://pytorch.org` rather than PyPI — update the `[[tool.uv.index]]` URL in `pyproject.toml` to match your CUDA build (e.g. `cu124`, `cpu`):
 
-```shell
-uv sync
-```
-
-To also install the development tools (`docstr-coverage`, `mypy`, `pylint`, `ruff`):
-
-```shell
-uv sync --group dev
-```
-
 *pip* - Install the package (and its runtime dependencies) directly from the repository root:
 
 ```shell
-pip install -e .
+pip install -e . --extra-index-url https://download.pytorch.org/whl/cu128
 ```
 
 *[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)* - Create and activate a `dinov3` conda environment using the provided environment definition:
